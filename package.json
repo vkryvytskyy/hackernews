@@ -1,0 +1,55 @@
+{
+  "name": "hackernews",
+  "version": "1.0.0",
+  "description": "simple project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vkryvytskyy/hackernews.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vkryvytskyy/hackernews/issues"
+  },
+  "homepage": "https://github.com/vkryvytskyy/hackernews#readme",
+  "dependencies": {
+    "graphql-yoga": "^1.18.3"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-import": "^2.20.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "husky": "^2.1.0",
+    "lint-staged": "^8.1.5"
+  },
+  "lint-staged": {
+    "linters": {
+      "*.{js,ts,tsx}": [
+        "eslint --fix",
+        "git add"
+      ],
+      "*.{ts,tsx}": [
+        "stylelint",
+        "git add"
+      ]
+    },
+    "ignore": [
+      "**/.next/**/*"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "post-commit": "git update-index --again",
+      "pre-commit": "lint-staged"
+    }
+  }
+}
