@@ -1,59 +1,38 @@
 const { GraphQLServer } = require('graphql-yoga');
-
-let links = [
-  {
-    id: 'link-0',
-    description: 'my firs link',
-    url: 'https://google.com',
-  },
-];
+const { prisma } = require('./generated/prisma-client');
 
 const resolvers = {
   Query: {
     info: () => 'This is the API speaking',
-    feed: () => links,
-    link: (parent, args) => {
-      const seekedLink = links.find((link) => link.id === args.id);
-      return seekedLink;
-    },
+    feed: (root, args, ctx) => ctx.prisma.links(),
+    link: (root, args, ctx) => ctx.prisma.link({
+      id: args.id,
+    }),
   },
   Mutation: {
-    post: (parent, args) => {
-      const counter = links.length;
-      const link = {
-        id: `link-${counter}`,
+    post: (root, args, ctx) => ctx.prisma.createLink({
+      url: args.url,
+      description: args.description,
+    }),
+    updateLink: (root, args, ctx) => ctx.prisma.updateLink({
+      where: {
+        id: args.id,
+      },
+      data: {
         description: args.description,
         url: args.url,
-      };
-      links.push(link);
-      return link;
-    },
-    updateLink: (parent, args) => {
-      let updatedLink = null;
-      links = links.map((link) => {
-        if (link.id === args.id) {
-          updatedLink = {
-            ...link,
-            description: args.description,
-            url: args.url,
-          };
-          return updatedLink;
-        }
-        return link;
-      });
-      return updatedLink;
-    },
-    deleteLink: (parent, args) => {
-      const deletedLink = links.find((link) => link.id === args.id);
-      links = links.filter((link) => link.id !== args.id);
-      return deletedLink;
-    },
+      },
+    }),
+    deleteLink: (root, args, ctx) => ctx.prisma.deleteLink({
+      id: args.id,
+    }),
   },
 };
 
 const server = new GraphQLServer({
   typeDefs: 'src/schema.graphql',
   resolvers,
+  context: { prisma },
 });
 
 server.start(() => console.log('Server is running on http://localhost:4000'));
