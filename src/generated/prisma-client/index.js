@@ -1,17 +1,21 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var prisma_lib_1 = require("prisma-client-lib");
+var typeDefs = require("./prisma-schema").typeDefs;
 
-Object.defineProperty(exports, '__esModule', { value: true });
-const prisma_lib_1 = require('prisma-client-lib');
-const { typeDefs } = require('./prisma-schema');
-
-const models = [
+var models = [
   {
-    name: 'Link',
-    embedded: false,
+    name: "Link",
+    embedded: false
   },
+  {
+    name: "User",
+    embedded: false
+  }
 ];
 exports.Prisma = prisma_lib_1.makePrismaClientClass({
   typeDefs,
   models,
-  endpoint: 'https://eu1.prisma.sh/kryvytskyy-volodymyr-2828cc/hackernews/dev',
+  endpoint: `https://eu1.prisma.sh/kryvytskyy-volodymyr-2828cc/hackernews/dev`
 });
 exports.prisma = new exports.Prisma();
