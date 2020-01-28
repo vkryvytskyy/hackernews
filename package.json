@@ -1,0 +1,64 @@
+{
+  "name": "hackernews",
+  "version": "1.0.0",
+  "description": "simple project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vkryvytskyy/hackernews.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vkryvytskyy/hackernews/issues"
+  },
+  "homepage": "https://github.com/vkryvytskyy/hackernews#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "graphql-yoga": "^1.18.3",
+    "jsonwebtoken": "^8.5.1",
+    "prisma": "^1.34.10",
+    "prisma-client-lib": "^1.34.10",
+    "stylelint": "^13.0.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.15.0",
+    "@typescript-eslint/parser": "^2.15.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-import": "^2.20.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "husky": "^2.1.0",
+    "lint-staged": "^8.1.5",
+    "stylelint-config-standard": "^19.0.0",
+    "typescript": "^3.7.4"
+  },
+  "lint-staged": {
+    "linters": {
+      "*.{js,ts,tsx}": [
+        "eslint --fix",
+        "git add"
+      ],
+      "*.{ts,tsx}": [
+        "stylelint",
+        "git add"
+      ]
+    },
+    "ignore": [
+      "**/.next/**/*"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "post-commit": "git update-index --again",
+      "pre-commit": "lint-staged"
+    }
+  }
+}
