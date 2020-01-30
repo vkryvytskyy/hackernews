@@ -45,6 +45,23 @@ const post = (parent, args, ctx) => {
   });
 };
 
+const updateLink = async (parent, args, ctx) => {
+  const link = await ctx.prisma.updateLink({
+    data: {
+      url: args.url,
+      description: args.description,
+    },
+    where: {
+      id: args.id,
+    },
+  });
+  return link;
+};
+
+const deleteLink = async (parent, args, ctx) => ctx.prisma.deleteLink({
+  id: args.id,
+});
+
 const vote = async (parent, args, ctx) => {
   const userId = getUserId(ctx);
 
@@ -67,5 +84,7 @@ module.exports = {
   signup,
   login,
   post,
+  updateLink,
+  deleteLink,
   vote,
 };
