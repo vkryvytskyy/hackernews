@@ -1,0 +1,12 @@
+{
+  "projects": {
+    "hackernews": {
+      "schemaPath": "./schema.json",
+      "extensions": {
+        "endpoints": {
+          "dev": "https://eu1.prisma.sh/kryvytskyy-volodymyr-2828cc/hackernews/dev"
+        }
+      }
+    }
+  }
+}
